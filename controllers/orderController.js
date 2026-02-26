@@ -1,19 +1,31 @@
 const {config} = require('../config/dotenvConfig')
+const { findById, crEateOrder } = require('../models/orderModel')
+const db = require('../db/db')
 
 async function createOrder(req, res) {
     try {
         const { user_id } = req.user
-        const { product_id, quantity } = req.body
+        const { product_id, quantity, fizetesi_mod } = req.body
 
-        if (!product_id || !quantity) {
+        //console.log('Érkező adatok:', {user_id, product_id, quantity, fizetesi_mod});
+
+        if (!product_id || !quantity || !fizetesi_mod) {
             return res.status(400).json({ error: 'Minden mező kitöltése kötelező!' })
         }
 
-        // Itt jönne a logika az order létrehozásához, például adatbázis műveletek
+        const user = await findById(user_id)
+        //console.log('FindById eredmény:', user);
 
-        return res.status(201).json({ message: 'Sikeres rendelés létrehozás!' })
+        if (!user) {
+            return res.status(404).json({ error: 'Felhasználó nem található!' })
+        }
+
+        const result = await crEateOrder(user_id, product_id, fizetesi_mod, quantity)
+
+        return res.status(201).json({ message: 'Sikeres rendelés létrehozás!', order_id: result.insertId })
     } catch (err) {
-        return res.status(500).json({ error: 'Szerver hiba!', err })
+        console.log(err);
+        return res.status(500).json({ error: 'Szerver hiba!'})
     }
 }
 
@@ -21,11 +33,18 @@ async function getOrders(req, res) {
     try {
         const { user_id } = req.user
 
-        // Itt jönne a logika a rendelések lekéréséhez, például adatbázis műveletek
+        const user = await findById(user_id)
+        
+        if (!user) {
+            return res.status(404).json({ error: 'Felhasználó nem található!' })
+        }
 
-        return res.status(200).json({ orders: [] }) // Példa válasz
+        const sql = "SELECT * FROM orders WHERE user_id = ?"
+        const [orders] = await db.query(sql, [user_id])
+
+        return res.status(200).json({ orders: orders })
     } catch (err) {
-        return res.status(500).json({ error: 'Szerver hiba!', err })
+        return res.status(500).json({ error: 'Szerver hiba!'})
     }
 }
 
@@ -47,7 +66,8 @@ async function deleteOrder(req, res) {
 
         return res.status(200).json({ message: 'Sikeres rendelés törlés!' })
     } catch (err) {
-        return res.status(500).json({ error: 'Szerver hiba!', err })
+        console.log(err);
+        return res.status(500).json({ error: 'Szerver hiba!'})
     }
 }
 
