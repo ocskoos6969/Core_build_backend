@@ -7,6 +7,6 @@ const router = express.Router()
 router.post('/register', register)
 router.post('/login', login)
 router.get('/whoami', authenticateToken, whoAmI)
-router.post('/logout', logout)
+router.post('/logout', authenticateToken, logout)
 
 module.exports = router
