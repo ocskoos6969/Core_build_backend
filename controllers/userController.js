@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { config } = require('../config/dotenvConfig')
-const { findByEmail, createUser } = require('../models/userModel')
+const { findByEmail, createUser, getUsers, deleteUser } = require('../models/userModel')
 
 const cookieOptions = {
     httpOnly: true,
@@ -81,4 +81,24 @@ async function logout(req, res) {
     return res.clearCookie(config.COOKIE_NAME, { path: '/' }).status(200).json({ message: 'Sikeres kijelentkezés!' })
 }
 
-module.exports = { register, login, whoAmI, logout }
+async function getAllUsers(req, res) {
+    try {
+        const users = await getUsers()
+        return res.status(200).json(users)
+    } catch (err) {
+        return res.status(500).json({ error: 'Szerver hiba!', err })
+    }
+}
+
+async function deleteUseR(req, res) {
+    try {
+        const user_id = req.params.user_id
+
+        const deleteuser = await deleteUser(user_id)
+        return res.status(200).json(deleteuser)
+    } catch (err) {
+        return res.status(500).json({ error: 'Szerver hiba!', err })
+    }
+}
+
+module.exports = { register, login, whoAmI, logout, getAllUsers, deleteUseR }

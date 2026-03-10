@@ -14,6 +14,20 @@ async function createUser(username, hash, phone, email) {
     return { insertId: result.insertId }
 }
 
+async function getUsers() {
+    const sql = 'SELECT * FROM users'
+    const [result] = await db.query(sql)
+
+    return result
+}
+
+async function deleteUser(user_id) {
+    const sql = 'DELETE FROM users WHERE user_id = ?'
+    const [result] = await db.query(sql, [user_id])
+
+    return result
+}
 
 
-module.exports = { findByEmail, createUser}
+
+module.exports = { findByEmail, createUser, getUsers, deleteUser}
