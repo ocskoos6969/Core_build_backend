@@ -22,7 +22,7 @@ async function getUsers() {
 }
 
 async function deleteUser(user_id) {
-    const sql = 'DELETE FROM users WHERE user_id = ?'
+    const sql = 'DELETE FROM `users` WHERE `userid` = ?'
     const [result] = await db.query(sql, [user_id])
 
     return result
@@ -30,4 +30,4 @@ async function deleteUser(user_id) {
 
 
 
-module.exports = { findByEmail, createUser, getUsers, deleteUser}
+module.exports = { findByEmail, createUser, getUsers, deleteUser }
