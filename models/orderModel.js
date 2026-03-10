@@ -13,4 +13,10 @@ async function crEateOrder( user_id, product_id, paymentMethod, quantity) {
     return { insertId: result.insertId }
 }
 
-module.exports = { findById, crEateOrder}
+async function getAllOrders() {
+    const sql = 'SELECT * FROM orders'
+    const [rows] = await db.query(sql)
+    return rows
+}
+
+module.exports = { findById, crEateOrder, getAllOrders }
