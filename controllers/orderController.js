@@ -1,5 +1,5 @@
 const {config} = require('../config/dotenvConfig')
-const { findById, crEateOrder } = require('../models/orderModel')
+const { findById, crEateOrder, getAllOrders } = require('../models/orderModel')
 const db = require('../db/db')
 
 async function createOrder(req, res) {
@@ -71,4 +71,14 @@ async function deleteOrder(req, res) {
     }
 }
 
-module.exports = { createOrder, getOrders, deleteOrder }
+async function allOrders (req, res) {
+    try {
+        const orders = await getAllOrders()
+        return res.status(200).json(orders)
+    } catch (err) {
+        //console.log(err);
+        return res.status(500).json({ error: 'Szerver hiba!'})
+    }
+}
+
+module.exports = { createOrder, getOrders, deleteOrder, allOrders }
