@@ -33,5 +33,4 @@ async function deleteProduct(product_id) {
 }
 
 
-
 module.exports = { findById, findAll, createProduct, updateProduct, deleteProduct }

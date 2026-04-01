@@ -14,7 +14,7 @@ const cookieOptions = {
 async function register(req, res) {
     try {
         const { username, email, phone, password } = req.body
-        //console.log(username, email, phone, password);
+        console.log(username, email, phone, password);
 
         if (!username || !email || !phone || !password) {
             return res.status(400).json({ error: 'Minden mező kitöltése kötelező!' })
@@ -54,7 +54,7 @@ async function login(req, res) {
         }
 
         const token = jwt.sign(
-            { user_id: userSQL.user_id, email: userSQL.email, username: userSQL.username, role: userSQL.role },
+            { user_id: userSQL.user_id, email: userSQL.email, username: userSQL.username, role: userSQL.role, phone: userSQL.phone_num },
             config.JWT_SECRET,
             { expiresIn: config.JWT_EXPIRES_IN }
         )
@@ -68,9 +68,9 @@ async function login(req, res) {
 }
 
 async function whoAmI(req, res) {
-    const { user_id, email, username, role } = req.user
+    const { user_id, email, username, role, phone } = req.user
     try {
-        return res.status(200).json({ user_id: user_id, email: email, username: username, role: role })
+        return res.status(200).json({ user_id: user_id, email: email, username: username, role: role, phone_num: phone })
     } catch (err) {
         //console.log(err);
         return res.status(500).json({ error: 'whoAmI szerver oldali hiba!', err })

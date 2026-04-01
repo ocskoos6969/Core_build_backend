@@ -8,7 +8,7 @@ async function findByEmail(email) {
 }
 
 async function createUser(username, hash, phone, email) {
-    const sql = 'INSERT INTO `users` (userid, username, password, phone_num, email, role) VALUES (NULL, ?, ?, ?, ?, "user")'
+    const sql = 'INSERT INTO `users` (user_id, username, password, phone_num, email, role) VALUES (NULL, ?, ?, ?, ?, "user")'
     const [result] = await db.query(sql, [username, hash, phone, email])
 
     return { insertId: result.insertId }
@@ -22,7 +22,7 @@ async function getUsers() {
 }
 
 async function deleteUser(user_id) {
-    const sql = 'DELETE FROM `users` WHERE `userid` = ?'
+    const sql = 'DELETE FROM `users` WHERE `user_id` = ?'
     const [result] = await db.query(sql, [user_id])
 
     return result
