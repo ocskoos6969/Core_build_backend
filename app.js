@@ -5,6 +5,7 @@ const cors = require('cors')
 const userRoutes = require('./routes/userRoutes')
 const orderRoutes = require('./routes/orderRoutes')
 const productRoutes = require('./routes/productRoutes')
+const TervezoRoutes = require('./routes/TervezoRoutes')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(cors({
 app.use('/users/', userRoutes)
 app.use('/orders/', orderRoutes)
 app.use('/products/', productRoutes)
+app.use('/tervezo', TervezoRoutes)
 
 
 module.exports = app

@@ -9,6 +9,6 @@ router.post('/login', login)
 router.get('/whoami', authenticateToken, whoAmI)
 router.post('/logout', authenticateToken, logout)
 router.get('/all', getAllUsers)
-router.delete('/:user_id', deleteUseR)
+router.delete('/delete/:user_id', deleteUseR)
 
 module.exports = router

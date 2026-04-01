@@ -6,9 +6,9 @@ const { authenticateToken } = require('../middleware/userMiddleware')
 
 
 router.get('/get', getProducts)
-router.get('/:product_id', validateProductExists, getProductsById)
+router.get('/:product_id', getProductsById)
 router.post('/create', createProducts)
-router.put('/update/:product_id', authenticateToken, validateProductExists, updateProducts)
-router.delete('/delete/:product_id', authenticateToken, validateProductExists, deleteProducts)
+router.put('/update/:product_id', authenticateToken, updateProducts)
+router.delete('/delete/:product_id', authenticateToken, deleteProducts)
 
 module.exports = router
