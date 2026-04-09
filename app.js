@@ -19,7 +19,7 @@ app.use(cors({
 app.use('/users/', userRoutes)
 app.use('/orders/', orderRoutes)
 app.use('/products/', productRoutes)
-app.use('/tervezo', TervezoRoutes)
+app.use('/tervezo/', TervezoRoutes)
 
 
 module.exports = app
