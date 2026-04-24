@@ -5,7 +5,7 @@ const { findByEmail, createUser, getUsers, deleteUser } = require('../models/use
 
 const cookieOptions = {
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: 'lax',
     path: '/',
     maxAge: 1000 * 60 * 60 * 24 * 7
