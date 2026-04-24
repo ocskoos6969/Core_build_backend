@@ -50,6 +50,7 @@ async function createOrder(req, res) {
 
         // Rendelés létrehozása
         const result = await crEateOrder(user_id, product_id, fizetesi_mod, quantity);
+        console.log(user_id, product_id, fizetesi_mod, quantity);
 
         // Email küldés - itt adjuk át a user.email-t
         try {
