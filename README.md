@@ -102,5 +102,15 @@ A backend a következő változókat olvassa be:
 
 A CoreBuild backend egy jól strukturált REST API, amely lehetővé teszi a frontend számára a felhasználók kezelését, az alkatrészek böngészését, és a rendelések feldolgozását. A hitelesítés JWT alapú, az adatbázis MySQL, és a rendszer automatikus email visszaigazolást is küld a sikeres vásárlásokról. Moduláris felépítése könnyen bővíthető és karbantartható.
 
+## Képek és Linkek
+
+# Drawsql
+Link: https://drawsql.app/teams/kiraj/diagrams/core-build-sql
+Kép: <img width="1411" height="879" alt="image" src="https://github.com/user-attachments/assets/d4e64c0c-e055-458a-9129-dcd7898d1eb5" />
+
+# Postman
+Link: https://documenter.getpostman.com/view/48108216/2sBXqJJzuq
+Kép: <img width="300" height="451" alt="image" src="https://github.com/user-attachments/assets/c5cf709e-3a3d-4357-87c8-b73ceb44239a" />
+
 ---
 Készítette: [Szabó Attila | Szanyi Balázs] – CORE Build Projekt BACKEND, 2026.
