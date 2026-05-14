@@ -23,3 +23,5 @@ app.use('/tervezo/', TervezoRoutes)
 
 
 module.exports = app
+
+//valami
